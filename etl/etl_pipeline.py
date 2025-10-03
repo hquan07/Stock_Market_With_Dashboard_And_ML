@@ -32,9 +32,9 @@ def run_load():
     df = pd.read_csv(TRANSFORMED)
 
     conn = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Huyquan160720040@",
+        host="host",
+        user="user-name",
+        password="your_password",
         database="stock_db"
     )
     cursor = conn.cursor()

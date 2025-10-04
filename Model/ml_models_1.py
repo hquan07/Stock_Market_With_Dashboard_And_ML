@@ -94,7 +94,7 @@ def run_models():
         random_state=42
     )
     agg['cluster'] = gmm.fit_predict(X_scaled)
-    agg['cluster_proba'] = gmm.predict_proba(X_scaled).max(axis=1)  # Probability of assigned cluster
+    agg['cluster_proba'] = gmm.predict_proba(X_scaled).max(axis=1) 
 
     print("=== GMM Clusters ===")
     print(agg.head())
@@ -104,8 +104,8 @@ def run_models():
     # ================= 4. ARIMA / SARIMA Forecasting =================
     print("\n=== Running ARIMA/SARIMA Forecasts ===")
     
-    # Select top tickers for ARIMA (to avoid excessive computation)
-    top_tickers = df['ticker'].value_counts().head(5).index.tolist()
+    # Select top tickers for ARIMA
+    top_tickers = df['ticker'].unique().tolist()
     
     arima_results = []
     
@@ -119,19 +119,17 @@ def run_models():
         
         # Split into train/test (last 30 days for testing)
         train_size = len(ts) - 30
-        if train_size < 50:  # Need enough data for ARIMA
+        if train_size < 50:  
             print(f"Skipping {ticker} - insufficient data")
             continue
             
         train, test = ts[:train_size], ts[train_size:]
         
         try:
-            # Try SARIMA first (with seasonal component)
-            # order=(p,d,q), seasonal_order=(P,D,Q,s)
             model = SARIMAX(
                 train, 
                 order=(1, 1, 1),
-                seasonal_order=(1, 1, 1, 5),  # 5-day seasonality
+                seasonal_order=(1, 1, 1, 5),  
                 enforce_stationarity=False,
                 enforce_invertibility=False
             )

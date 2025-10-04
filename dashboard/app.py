@@ -30,7 +30,12 @@ if os.path.exists(OUTPUT_ARIMA):
         df_forecasts['date'] = pd.to_datetime(df_forecasts['date'])
 
 # ================= Initialize App =================
-app = Dash(__name__, external_stylesheets=[dbc.themes.CYBORG, dbc.icons.FONT_AWESOME])
+app = Dash(
+    __name__,
+    external_stylesheets=[dbc.themes.CYBORG, dbc.icons.FONT_AWESOME],
+    suppress_callback_exceptions=True
+)
+
 app.title = "Stock Dashboard"
 
 GRAPH_TEMPLATE = go.layout.Template(
@@ -319,4 +324,5 @@ def update_forecast_graph(ticker):
 
 # ================= Main =================
 if __name__ == "__main__":
+
     app.run(debug=True)

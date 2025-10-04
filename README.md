@@ -118,3 +118,6 @@ Features include:
 - **ETL Flow**: Raw data → Cleaning → Feature Engineering → Database  
 - **Database Schema**: see `db/schema.sql`  
 - **Additional Charts**: Extended visualization in `/reports/`
+
+---
+Contact with me: huyquan1607@gmail.com
